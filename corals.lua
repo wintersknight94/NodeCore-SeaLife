@@ -43,13 +43,13 @@ local function register_coral(id, color)
 			}
 		},
 		groups = {
-			snappy = 1,
+			cracky = 2,
 			coral = 1,
 			coral_living = 1,
 			sealife = 1,
 		},
-		drop_in_place = modname.. ":coral_dead",
-		sounds = nodecore.sounds("nc_terrain_stony"),
+--		drop_in_place = modname.. ":coral_dead",
+		sounds = nodecore.sounds("nc_terrain_stony", nil, 1.3),
 	})
 end
 ------------------------------------------------------------------------

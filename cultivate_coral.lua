@@ -19,9 +19,10 @@ local drydrawtypes = {
 	allfaces_optional = true
 }
 
-local function coral(id)
-	local living = modname.. ":coral_living_" ..id
+for i = 1, 8 do
+	local living = modname.. ":coral_living_" ..i
 	local dead = modname .. ":coral_dead"
+
 
 minetest.after(0, function()
 		for k, v in pairs(minetest.registered_items) do
@@ -73,7 +74,7 @@ local function coralsurvive(data)
 end
 
 nodecore.register_dnt({
-		name = modname .. ":coraldie",
+		name = modname .. ":coraldie_" ..i,
 		nodenames = {living},
 		time = 2,
 		action = function(pos, node)
@@ -91,7 +92,7 @@ minetest.register_abm({
 		arealoaded = 1,
 		action = function(pos, node)
 			if not coralsurvive({pos = pos, node = node}) then
-				nodecore.dnt_set(pos, modname .. ":coraldie")
+				nodecore.dnt_set(pos, modname .. ":coraldie_" ..i)
 			end
 		end
 	})
@@ -117,11 +118,11 @@ end
 
 
 
-	local basecost = 20 --2000
+	local basecost = 2000 --2000
 		nodecore.register_soaking_abm({
-			label = "coral " ..id.. " grow",
+			label = "coral " ..i.. " grow",
 			fieldname = "coralgrow",
-			nodenames = {modname.. ":coral_living_" ..id},
+			nodenames = {modname.. ":coral_living_" ..i},
 			interval = 5,
 			chance = 2,
 			arealoaded = 6,
@@ -165,3 +166,5 @@ end
 			end
 		})
 end
+
+
