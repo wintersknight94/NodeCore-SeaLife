@@ -52,9 +52,28 @@ local function notdry(pos)
 	end
 end
 
+local accessdirs = nodecore.dirs()
 local function sealed_or_notdry(nodename, pos)
-	if nodename == "nc_optics:shelf" then
-		return (not pos) or notdry({x = pos.x, y = pos.y + 1, z = pos.z})
+	local def = minetest.registered_nodes[nodename]
+	if def and def.groups then
+		if def.groups.moist and def.groups.moist > 0 then
+			return true
+		end
+		if def.groups.storebox_sealed and def.groups.storebox_sealed > 0 then
+			if not pos then return true end
+			for i = 1, #accessdirs do
+				local pt = {
+					type = "node",
+					above = vector.add(accessdirs[i], pos),
+					under = pos
+				}
+				if (not def.storebox_access) or def.storebox_access(pt, pos,
+					{name = nodename, param = 0, param2 = 0}) then
+					if not notdry(pt.above) then return end
+				end
+			end
+			return true
+		end
 	end
 	if not pos then return end
 	for _, d in pairs(alldirs) do
