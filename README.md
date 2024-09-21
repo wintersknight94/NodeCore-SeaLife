@@ -15,3 +15,8 @@ Fill Seas & Rivers of NodeCore With Biodiveristy!
 - Kelp Cultivation
 - Life Cycles
 - Predation
+- Use for Urchin Quills
+- Plankton
+- Octopus
+- Maybe Giant Eels?
+- Possibly some type of fish?
