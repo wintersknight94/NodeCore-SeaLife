@@ -27,12 +27,6 @@ include("kelp")
 
 --<>--
 
-include("sessile")
-
-include("drifting")
-
---<>--
-
 include("cultivate_coral")
 
 --include("cultivate_kelp")
