@@ -118,14 +118,16 @@ minetest.register_abm({
 minetest.register_abm({
 	label = "kelp growing",
 	nodenames = {modname .. ":kelp_living"},
-	interval = 1, --300,
+	interval = 300, --300,
 	chance = 20, --20,
 	action = function(pos)
 	  local above = {x = pos.x, y = pos.y + 1, z = pos.z}
 	  local above2 = {x = pos.x, y = pos.y + 2, z = pos.z}
 	  local anode = minetest.get_node(above).name
 	  local a2node = minetest.get_node(above2).name
-		if a2node == "air" then return end
+--		if a2node == "air" then return end
+		if anode ~= "nc_terrain:water_source" then return end
+		if a2node ~= "nc_terrain:water_source" then return end
 		if a2node == "nc_terrain:water_source" then
 			nodecore.set_loud(above, {name = modname .. ":kelp_living"})
 		end
