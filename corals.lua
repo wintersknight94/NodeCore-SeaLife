@@ -71,6 +71,7 @@ minetest.register_node(modname.. ":coral_dead", {
 		coral = 1,
 		coral_dead = 1,
 		sealife = 1,
+		falling_repose = 2
 	},
 	sounds = nodecore.sounds("nc_terrain_stony"),
 })
@@ -78,7 +79,7 @@ minetest.register_node(modname.. ":coral_dead", {
 minetest.register_decoration({
 	name = modname.. ":corals",
 	deco_type = "simple",
-	place_on = {"nc_terrain:sand"},
+	place_on = {"nc_terrain:sand", modname.. ":coral_dead"},
 --	place_offset_y = -1,
 	sidelen = 4,
 	noise_params = {
@@ -151,7 +152,7 @@ minetest.register_decoration({
 	},
 	biomes = {"seabed", "deep"},
 	y_max = -12,
-	y_min = -32,
+	y_min = -64,
 	flags = "force_placement",
 	decoration = {
 		modname.. ":coral_dead",

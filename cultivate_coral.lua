@@ -152,7 +152,7 @@ end
 					if water[node.name] then
 						local below = {x = dest.x, y = dest.y - 1, z = dest.z}
 						node = minetest.get_node(below)
-						if node.name == living or sand[node.name] then
+						if node.name == living or dead or sand[node.name] then
 							nodecore.set_loud(dest, {name = living})
 							if dest.y <= pos.y and math_random(1, 2) == 1 then
 								nodecore.soaking_abm_push(dest,

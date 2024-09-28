@@ -9,6 +9,8 @@ local kelp = modname.. "_kelp.png"
 local function findwater(pos)
 	return nodecore.find_nodes_around(pos, "group:water")
 end
+
+--[[
 local function kelp_water(pos)
 	local node = minetest.get_node(pos)
 	local def = minetest.registered_nodes[node.name]
@@ -19,6 +21,8 @@ local function kelp_soil(pos)
 	local soil = minetest.get_item_group(node.name, "sand")
 	return soil and soil > 0
 end
+]]
+
 -- ================================================================== --
 minetest.register_node(modname .. ":kelp_living", {
 	description = "Kelp",
@@ -34,7 +38,8 @@ minetest.register_node(modname .. ":kelp_living", {
 		fire_fuel = 5,
 		kelp = 1,
 		kelp_living = 1,
-		flora = 1
+--		flora = 1,
+		falling_node = 1
 	},
 	walkable = false,
 	climbable = true,
@@ -55,7 +60,8 @@ minetest.register_node(modname .. ":kelp_dead", {
 		flammable = 3,
 		fire_fuel = 5,
 		kelp = 1,
-		flora = 1
+		flora = 1,
+		falling_repose = 1
 	},
 	sounds = nodecore.sounds("nc_terrain_swishy")
 })
@@ -108,6 +114,24 @@ minetest.register_abm({
 		end
 	})
 -- ================================================================== --
+-- need to eventually make it so that they can reach the surface and spread horizontally under overgrow conditions
+minetest.register_abm({
+	label = "kelp growing",
+	nodenames = {modname .. ":kelp_living"},
+	interval = 1, --300,
+	chance = 20, --20,
+	action = function(pos)
+	  local above = {x = pos.x, y = pos.y + 1, z = pos.z}
+	  local above2 = {x = pos.x, y = pos.y + 2, z = pos.z}
+	  local anode = minetest.get_node(above).name
+	  local a2node = minetest.get_node(above2).name
+		if a2node == "air" then return end
+		if a2node == "nc_terrain:water_source" then
+			nodecore.set_loud(above, {name = modname .. ":kelp_living"})
+		end
+	end,
+})
+--[[
 minetest.register_abm({
 	label = "kelp growing",
 	nodenames = {modname .. ":kelp_living"},
@@ -125,6 +149,7 @@ minetest.register_abm({
 			end
 	end,
 })
+]]
 -- ================================================================== --
 minetest.register_decoration({
 	name = modname.. ":kelp",
