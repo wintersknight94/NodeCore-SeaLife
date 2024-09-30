@@ -3,25 +3,15 @@ local minetest, nodecore
     = minetest, nodecore
 -- LUALOCALS > ---------------------------------------------------------
 local modname = minetest.get_current_modname()
+local water_level = tonumber(minetest.get_mapgen_setting("water_level"))
+
 local water = "nc_terrain:water_source"
 local watertxr = "(nc_terrain_water.png^[verticalframe:32:8)^[opacity:160"
 local kelp = modname.. "_kelp.png"
+
 local function findwater(pos)
 	return nodecore.find_nodes_around(pos, "group:water")
 end
-
---[[
-local function kelp_water(pos)
-	local node = minetest.get_node(pos)
-	local def = minetest.registered_nodes[node.name]
-	return def and def.water
-end
-local function kelp_soil(pos)
-	local node = minetest.get_node(pos)
-	local soil = minetest.get_item_group(node.name, "sand")
-	return soil and soil > 0
-end
-]]
 
 -- ================================================================== --
 minetest.register_node(modname .. ":kelp_living", {
@@ -58,7 +48,7 @@ minetest.register_node(modname .. ":kelp_dead", {
 	groups = {
 		snappy = 1,
 		flammable = 3,
-		fire_fuel = 5,
+		fire_fuel = 3,
 		kelp = 1,
 		flora = 1,
 		falling_repose = 1
@@ -122,16 +112,11 @@ minetest.register_abm({
 	chance = 20, --20,
 	action = function(pos)
 	  local above = {x = pos.x, y = pos.y + 1, z = pos.z}
-	  local above2 = {x = pos.x, y = pos.y + 2, z = pos.z}
 	  local anode = minetest.get_node(above).name
-	  local a2node = minetest.get_node(above2).name
---		if a2node == "air" then return end
+		if pos.y >= water_level-1 then return end
 		if anode ~= "nc_terrain:water_source" then return end
-		if a2node ~= "nc_terrain:water_source" then return end
-		if a2node == "nc_terrain:water_source" then
-			nodecore.set_loud(above, {name = modname .. ":kelp_living"})
-		end
-	end,
+		  nodecore.set_loud(above, {name = modname .. ":kelp_living"})
+	end
 })
 --[[
 minetest.register_abm({
