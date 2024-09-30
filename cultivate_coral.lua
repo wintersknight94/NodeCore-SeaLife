@@ -5,7 +5,7 @@ local math_random, math_sqrt
     = math.random, math.sqrt
 -- LUALOCALS > ---------------------------------------------------------
 local modname = minetest.get_current_modname()
-
+local water_level = tonumber(minetest.get_mapgen_setting("water_level"))
 local alldirs = nodecore.dirs()
 
 local water = {}
@@ -129,7 +129,7 @@ end
 			soakrate = function() return 2 end,
 			soakcheck = function(data, pos)
 				if data.total < basecost then return end
-
+				if pos.y >= water_level-1 then return end
 				local count = 0
 				if nodecore.scan_flood(pos, 6,
 					function(p, d)
