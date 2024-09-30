@@ -159,5 +159,13 @@ minetest.register_decoration({
 
 	},
 })
-
-
+-- ================================================================== --
+nodecore.register_craft({
+	label = "crush dead coral to sand",
+	action = "pummel",
+	toolgroups = {thumpy = 4},
+	indexkeys = {modname .. ":coral_dead"},
+	nodes = {
+		{match = modname .. ":coral_dead", replace = "nc_terrain:sand"}
+	}
+})
