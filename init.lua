@@ -43,3 +43,7 @@ end
 if minetest.get_modpath("ncshark") then
 	include("sharks")
 end
+
+--<>--
+
+include("bubbly")
