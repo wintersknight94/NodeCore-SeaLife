@@ -16,7 +16,7 @@ local spikey = modname.. "_urchin.png^[colorize:" ..color
 		description = "Urchin",
 		drawtype = "plantlike_rooted",
 		tiles = {"nc_terrain_sand.png"},
-		falling_visual = "nc_terrain_sand.png",
+		falling_visual = {spikey},
 		special_tiles = {spikey},
 		visual_scale = size,
 		sunlight_propagates = true,
@@ -25,16 +25,20 @@ local spikey = modname.. "_urchin.png^[colorize:" ..color
 		place_param2 = 10,
 		groups = {
 			urchin = str,
+			snappy = 1,
 			sealife = 1,
 			stack_as_node = 1,
 			damage_touch = str,
+			damage_pickup = str,
+			tongs_pickup = 1,
 			sessile = 1,
-			peat_grindable_node = 1
+			peat_grindable_node = 1,
+			falling_node = 1
 		},
 		walkable = false,
 		damage_per_second = str,
 		move_resistance = str*10,
-		sounds = nodecore.sounds("nc_terrain_stoney"),
+		sounds = nodecore.sounds("nc_terrain_swishy"),
 		selection_box = box,
 		collision_box = box,
 	})
@@ -79,7 +83,7 @@ minetest.register_node(modname.. ":urchin_" ..id.. "_spike", {
 		flammable = 100,
 		attached_node = 1,
 	},
-	sounds = nodecore.sounds("nc_terrain_stoney"),
+	sounds = nodecore.sounds("nc_terrain_stony"),
 })
 ------------------------------------------------------------------------
 nodecore.register_craft({
@@ -92,6 +96,24 @@ nodecore.register_craft({
 	after=function(pos)
 		local yield = math.random(0,3)
 		nodecore.item_eject(pos, {name = modname.. ":urchin_" ..id.. "_spike"}, 1, yield)
+	end
+})
+------------------------------------------------------------------------
+minetest.register_abm({
+	label = "urchin death",
+	interval = 60,
+	chance = 4,
+	nodenames = {modname.. ":urchin_" ..id},
+	neighbors = {"air"},
+	action = function(pos, node)
+		  local yield = math.random(0,3)
+		  local above = {x = pos.x, y = pos.y + 1, z = pos.z}
+		  local anode = minetest.get_node(above).name
+			if anode == "air" then
+				nodecore.set_node(pos, {name = "nc_terrain:sand_loose"})
+				nodecore.item_eject(above, {name = modname.. ":urchin_" ..id.. "_spike"}, 1, yield)
+		
+			end
 	end
 })
 ------------------------------------------------------------------------

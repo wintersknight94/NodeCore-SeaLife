@@ -25,7 +25,7 @@ local anemone = {
 		description = "Anemone",
 		drawtype = "plantlike_rooted",
 		tiles = {grip},
-		falling_visual = grip,
+		falling_visual = {anemone},
 		special_tiles = {anemone},
 		visual_scale = 1,
 		sunlight_propagates = true,
@@ -38,7 +38,10 @@ local anemone = {
 			sealife = 1,
 			stack_as_node = 1,
 			damage_touch = 1,
-			peat_grindable_node = 1
+			damage_pickup = 1,
+			tongs_pickup = 1,
+			peat_grindable_node = 1,
+			falling_node = 1,
 		},
 		walkable = false,
 		waving = 1,
@@ -49,6 +52,22 @@ local anemone = {
 		collision_box = box,
 	})
 ------------------------------------------------------------------------
+minetest.register_abm({
+	label = "anemone death",
+	interval = 4,
+	chance = 4,
+	nodenames = {modname.. ":anemone_" ..id},
+	neighbors = {"air"},
+	action = function(pos, node)
+		  local yield = math.random(0,3)
+		  local above = {x = pos.x, y = pos.y + 1, z = pos.z}
+		  local anode = minetest.get_node(above).name
+			if anode == "air" then
+				nodecore.set_node(pos, {name = modname.. ":coral_dead"})
+			end
+	end
+})
+
 end
 ------------------------------------------------------------------------	
 anemone("sand",	"nc_terrain_sand.png")
