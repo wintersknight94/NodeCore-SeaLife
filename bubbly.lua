@@ -36,7 +36,7 @@ end
 ------------------------------------------------------------------------
 nodecore.register_abm({
 		label = "particles:bubbles",
-		interval = 4,
+		interval = 20,
 		chance = 4,
 		nodenames = {modname.. ":mollusk"},
 		action = function(pos)
