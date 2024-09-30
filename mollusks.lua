@@ -29,7 +29,6 @@ minetest.register_node(modname .. ":mollusk", {
 			sealife = 1,
 			mollusk = 1,
 			clam_living = 1,
-
 		},
 		sounds = nodecore.sounds("nc_terrain_stony", nil, 0.7),
 		paramtype2 = "facedir",

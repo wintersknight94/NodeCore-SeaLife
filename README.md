@@ -12,11 +12,10 @@ Fill Seas & Rivers of NodeCore With Biodiveristy!
 # Planned Features
 - Seastars
 - Bobbits (Eunice Aphroditois)
-- Kelp Cultivation
 - Life Cycles
 - Predation
 - Use for Urchin Quills
 - Plankton
 - Octopus
 - Maybe Giant Eels?
-- Possibly some type of fish?
+- Possibly some type of fish? like a parrot fish, but less specific

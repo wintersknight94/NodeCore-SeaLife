@@ -2,6 +2,9 @@
 local include, nodecore
     = include, nodecore
 -- LUALOCALS > ---------------------------------------------------------
+local modname = minetest.get_current_modname()
+
+--<>--
 
 include("oceanfix")
 
@@ -29,8 +32,14 @@ include("kelp")
 
 include("cultivate_coral")
 
---include("cultivate_kelp")
+--<>--
+
+if minetest.settings:get_bool(modname .. ".foodweb", true) then
+	include("predation")
+end
 
 --<>--
 
-
+if minetest.get_modpath("ncshark") then
+	include("sharks")
+end

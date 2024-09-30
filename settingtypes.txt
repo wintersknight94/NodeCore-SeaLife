@@ -1,0 +1,4 @@
+# Experimental Feature - Use at own risk.
+# Adds another layer of complexity, as some sealife will predate on others.
+# Simulates a simple food chain concept.
+wc_sealife.foodweb (Food Web) bool true
