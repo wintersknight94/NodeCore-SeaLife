@@ -70,8 +70,17 @@ minetest.register_node(modname.. ":coral_dead", {
 		cracky = 2,
 		coral = 1,
 		coral_dead = 1,
-		sealife = 1,
-		falling_repose = 2
+	},
+	alternate_loose = {
+		tiles = {"(" ..modname.. "_coral.png^[colorize:WHITE:140)^nc_api_loose.png"},
+		groups = {
+			crumbly = 2,
+			coral = 1,
+			coral_dead = 1,
+			coral_loose = 1,
+			falling_repose = 2,
+		},
+		sounds = nodecore.sounds("nc_terrain_chompy"),
 	},
 	sounds = nodecore.sounds("nc_terrain_stony"),
 })
