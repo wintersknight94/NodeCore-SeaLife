@@ -19,7 +19,7 @@ local water_level = tonumber(minetest.get_mapgen_setting("water_level"))
 local function urchins(id)
 	minetest.register_abm({
 		label = id.. "Urchin Eating Kelp",
-		interval = 4,
+		interval = 20,
 		chance = 4,
 		nodenames = {"group:kelp"},
 		neighbors = {modname.. ":urchin_" ..id},
@@ -27,7 +27,7 @@ local function urchins(id)
 		action = function(pos)
 		  if not nodecore.find_nodes_around(pos, "group:kelp") then return end
 			if math.random(1,10) == 10 then
-				minetest.set_node(pos, {name = modname.. ":urchin_id"})
+				minetest.set_node(pos, {name = modname.. ":urchin_" ..id})
 				minetest.check_for_falling(pos)
 				else minetest.set_node(pos, {name = water})
 			end
