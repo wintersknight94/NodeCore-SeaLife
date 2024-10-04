@@ -29,7 +29,7 @@ nodecore.register_concrete_etchable({
 		pattern_invert = true,
 		pliant = {
 			sounds = nodecore.sounds("nc_terrain_crunchy"),
-			drop_in_place = modname .. ":seamix_wet_source",
+			drop_in_place = "nc_concrete:seamix_wet_source",
 			silktouch = false
 		}
 	})
@@ -41,10 +41,10 @@ nodecore.register_concrete({
 	.. "nc_terrain_gravel.png^[opacity:128)^[mask:nc_concrete_mask.png)",
 	sound = "nc_terrain_chompy",
 	groups_powder = {crumbly = 1},
-	swim_color = {r = 150, g = 90, b = 100},
-	craft_from_keys = {"group:coral_dead"},
-	craft_from = {groups = {coral_dead = true}},
-	to_crude = modname.. ":coral_dead",
+	swim_color = {r = 200, g = 200, b = 200},
+	craft_from_keys = {"group:coral_loose"},
+	craft_from = {groups = {coral_loose = true}},
+	to_crude = modname.. ":coral_dead_loose",
 	to_washed = modname.. ":coral_dead",
 	to_molded = localpref .. "seament_blank_ply"
 })
