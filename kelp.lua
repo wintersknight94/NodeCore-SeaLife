@@ -108,8 +108,8 @@ minetest.register_abm({
 minetest.register_abm({
 	label = "kelp growing",
 	nodenames = {modname .. ":kelp_living"},
-	interval = 300, --300,
-	chance = 20, --20,
+	interval = 240,
+	chance = 12,
 	action = function(pos)
 	  local above = {x = pos.x, y = pos.y + 1, z = pos.z}
 	  local anode = minetest.get_node(above).name
