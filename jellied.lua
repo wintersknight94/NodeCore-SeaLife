@@ -5,6 +5,12 @@ local minetest, nodecore, pairs, vector
 local modname = minetest.get_current_modname()
 local alldirs = nodecore.dirs()
 local spongewet = modname .. ":sponge_slime"
+local rfcall = function(pos, data)
+	local ref = minetest.get_player_by_name(data.pname)
+	local wield = ref:get_wielded_item()
+	wield:take_item(1)
+	ref:set_wielded_item(wield)
+end
 -- ================================================================== --
 minetest.register_node(modname .. ":sponge_slime", {
 		description = "Jellied Sponge",
@@ -57,5 +63,19 @@ minetest.register_abm({
 			return minetest.set_node(pos, {name = modname .. ":sponge"})
 		end
 	})
-
-
+-- ================================================================== --
+for i = 1,4 do
+	nodecore.register_craft({
+		label = "sponge seajelly",
+		action = "pummel",
+		duration = -1,
+		priority = 1,
+		wield = {name = "nc_sponge:sponge_wet"},
+		consumewield = 1,
+		indexkeys = {modname.. ":seajelly_" ..i},
+--		after = rfcall,
+		nodes = {
+			{match = {name = modname.. ":seajelly_" ..i}, replace = modname.. ":sponge_slime"},
+		}
+	})
+end
