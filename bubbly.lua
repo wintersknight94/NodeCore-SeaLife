@@ -34,6 +34,8 @@ local function bubbly(posa, posb)
 		})
 end
 ------------------------------------------------------------------------
+nodecore.bubblefx = bubbly
+------------------------------------------------------------------------
 nodecore.register_abm({
 		label = "particles:bubbles",
 		interval = 20,
@@ -44,7 +46,7 @@ nodecore.register_abm({
 			local abnod = minetest.get_node(above)
 			local top = {x = pos.x, y = pos.y + 0.5, z = pos.z}
 			     if abnod.name == "nc_terrain:water_source" then
-					bubbly(top)
+					bubblefx(top)
 			end
 		end
 })
