@@ -46,7 +46,7 @@ nodecore.register_abm({
 			local abnod = minetest.get_node(above)
 			local top = {x = pos.x, y = pos.y + 0.5, z = pos.z}
 			     if abnod.name == "nc_terrain:water_source" then
-					bubblefx(top)
+					nodecore.bubblefx(top)
 			end
 		end
 })
