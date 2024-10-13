@@ -5,16 +5,16 @@ Fill Seas & Rivers of NodeCore With Biodiveristy!
 - Coral (A Colorful Variety)
 - Anemones
 - Mollusks
-- Urchins (Four Variants Based On Depth)
+- Urchins (Four Variants Based On Depth) (Eats Kelp To Reproduce)
 - Seajellies (Four Variants Based On Depth)
-- Kelp
+- Seagrass & Kelp 
+- Jellied Sponges (Very Slippery & Bouncy)
 
 # Planned Features
 - Seastars
 - Bobbits (Eunice Aphroditois)
 - Life Cycles
-- Predation
-- Use for Urchin Quills
+- More Predation
 - Plankton
 - Octopus
 - Maybe Giant Eels?

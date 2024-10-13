@@ -60,7 +60,7 @@ local function register_jelly(id, color, light, postfx)
 		walkable = false,
 		damage_per_second = 1,
 		move_resistance = 4,
-		drop_in_place = "nc_terrain:water_source",
+		drop_in_place = "nc_terrain:water_flowing",
 		sounds = nodecore.sounds("nc_terrain_watery"),
 		light_source = light, glow = 1,
 	})
@@ -166,3 +166,17 @@ minetest.register_decoration({
 	},
 })
 -- ================================================================== --
+
+nodecore.register_abm({
+	label = "Seajelly Asphixiation",
+	interval = 4,
+	chance = 2,
+	nodenames = {"group:jelly_living"},
+	action = function(pos, node)
+		if #nodecore.find_nodes_around(pos, {"group:water"}, 1) >= 8 then
+			return
+		end
+			nodecore.set_loud(pos, {name = "nc_terrain:water_flowing"})
+			nodecore.bubblefx(pos)
+	end
+})

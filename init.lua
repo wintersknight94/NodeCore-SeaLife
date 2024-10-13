@@ -15,6 +15,7 @@ include("seajellies")
 --include("bobbits")
 --<>--
 include("kelp")
+include("seagrass")
 --<>--
 include("jellied")
 --<>--

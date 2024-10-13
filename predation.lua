@@ -33,6 +33,22 @@ local function urchins(id)
 			end
 		end
 	})
+	minetest.register_abm({
+		label = id.. "Urchin Eating Seagrass",
+		interval = 20,
+		chance = 4,
+		nodenames = {"group:seagrass"},
+		neighbors = {modname.. ":urchin_" ..id},
+		neighbors_invert = true,
+		action = function(pos)
+		  if not nodecore.find_nodes_around(pos, "group:seagrass") then return end
+			if math.random(1,10) == 10 then
+				minetest.set_node(pos, {name = modname.. ":urchin_" ..id})
+				minetest.check_for_falling(pos)
+				else minetest.set_node(pos, {name = water})
+			end
+		end
+	})
 end
 urchins("purple")
 urchins("red")

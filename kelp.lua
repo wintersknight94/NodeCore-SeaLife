@@ -19,7 +19,9 @@ minetest.register_node(modname .. ":kelp_living", {
 	tiles = {watertxr.. "^nc_tree_leaves.png"},--^[colorize:#2e8b57:120"},
 	inventory_image = kelp,
 	wield_image = kelp,
+	use_alpha_texture = "clip",
 	color = "#2e8b57", --SeaGreen
+--	post_effect_color = "#2e8b57", --SeaGreen
 	drawtype = "allfaces_optional",
 	paramtype = "light",
 	groups = {
@@ -31,8 +33,8 @@ minetest.register_node(modname .. ":kelp_living", {
 --		flora = 1,
 		falling_node = 1
 	},
-	walkable = false,
-	climbable = true,
+--	walkable = false,
+--	climbable = true,
 	waving = 1,
 	sounds = nodecore.sounds("nc_terrain_swishy")
 })
@@ -109,6 +111,7 @@ minetest.register_abm({
 	label = "kelp growing",
 	nodenames = {modname .. ":kelp_living"},
 	interval = 240,
+	arealoaded = 2,
 	chance = 12,
 	action = function(pos)
 	  local above = {x = pos.x, y = pos.y + 1, z = pos.z}
@@ -142,7 +145,7 @@ minetest.register_decoration({
 	name = modname.. ":kelp",
 	deco_type = "simple",
 	place_on = {"group:sand"},
-	place_offset_y = -1,
+--	place_offset_y = -1,
 	sidelen = 16,
 	noise_params = {
 		offset = -0.04,
@@ -153,10 +156,10 @@ minetest.register_decoration({
 		persist = 0.7
 	},
 	biomes = {"seabed"},
-	y_max = -8,
-	y_min = -32,
+	y_max = -13,
+	y_min = -40,
 	flags = "force_placement",
 	decoration = modname.. ":kelp_living",
-	height = 4,
-	height_max = 8,
+	height = 8,
+	height_max = 12,
 })
