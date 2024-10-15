@@ -60,7 +60,7 @@ minetest.register_abm({
 		neighbors = {"group:igniter"},
 		action = function(pos)
 			nodecore.sound_play("nc_api_craft_hiss", {gain = 0.02, pos = pos})
-			return minetest.set_node(pos, {name = modname .. ":sponge"})
+			return minetest.set_node(pos, {name = "nc_sponge:sponge"})
 		end
 	})
 -- ================================================================== --
